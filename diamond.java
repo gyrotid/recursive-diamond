@@ -1,11 +1,9 @@
 import java.util.Scanner;
 
 /*
-I will be blatantly stealing the structure from the book
-Chapter 12 Section 12.4 "Using Recursion to Create Visual Patterns"
-In that, they use a recursion method to hold 2 variables which I also used.
-Spaces tracks the amount of spaces
-Line is the number of lines to perform that specific string of characters for
+The recursion works by printing a triangle, then mirroring that and printing that same triangle backwards.
+Thus making the diamond! Originally, I had used the example from Chapter 12. But as the program evolved
+I had to 
 */
 public class diamond
 {
@@ -13,7 +11,6 @@ public class diamond
     {
         diamond d = new diamond();
         Scanner input = new Scanner(System.in);
-        int size;
         System.out.println("Print the diamond? 1 = 'Yes' 0 = 'No'");
         int choice = input.nextInt();
         if (choice == 1)
@@ -31,9 +28,37 @@ public class diamond
     {
         if (line > size)
             return;
-        
-        printDiamond(line);
-        printSpaces(size - line);
+        int middle = size / 2 + 1;
+        int leftStar, rightStar;
+        int space;
+
+        if (line <= middle)
+        {
+            leftStar = size - (line - 1);
+            rightStar = leftStar;
+            space = (line - 1) * 2 - 1;
+            if (space < 0)
+                space = 0;
+        }
+        else
+        {
+            int mirror = size - line + 1;
+            leftStar = size - (mirror - 1);
+            rightStar = leftStar;
+            space = (mirror - 1) * 2 - 1;
+            if (space < 0)
+                space = 0;
+        }
+        printDiamond(leftStar);
+        if (line == 2 || line == 22)
+        {
+            printSpaces(space, false);
+        }
+        else
+        {
+            printSpaces(space, true);
+        }
+        printDiamond(rightStar);
         System.out.println();
 
         printStyle(line + 1, size);
@@ -43,15 +68,20 @@ public class diamond
     {
         if (count == 0)
             return;
-        System.out.println("*");
+        System.out.print("*");
         printDiamond(count - 1);   
     }
 
-    void printSpaces(int count)
+    void printSpaces(int count, boolean doubleSpace)
     {
         if (count == 0)
             return;
-        System.out.print(" ");
-        printSpaces(count - 1);
+
+        if (doubleSpace)
+            System.out.print("  ")
+        else
+            System.out.print(" ");
+
+        printSpaces(count - 1, doubleSpace);
     } 
 }
