@@ -1,4 +1,4 @@
-java.util.scanner;
+import java.util.Scanner;
 
 /*
 I will be blatantly stealing the structure from the book
@@ -9,48 +9,49 @@ Line is the number of lines to perform that specific string of characters for
 */
 public class diamond
 {
-    public static void Main(String[] args)
+    public static void main(String[] args)
     {
+        diamond d = new diamond();
         Scanner input = new Scanner(System.in);
-        int line;
+        int size;
         System.out.println("Print the diamond? 1 = 'Yes' 0 = 'No'");
         int choice = input.nextInt();
         if (choice == 1)
         {
-            printDiamond(line);
-            printSpaces(0, line);
-            System.out.println();
-        }
-        else if (choice == 0)
-        {
-            return -1;
+            d.printStyle(1, 23);   
         }
         else
         {
             System.out.println("Invalid input, please try again.");
-            Main();
+            main(new String[0]);
         }
     }
 
-    void printDiamond(int spaces, int line)
+    void printStyle(int line, int size)
     {
-        if (line == 0)
+        if (line > size)
             return;
-        else
-        {
-            System.out.println("*");
-            printDiamond(spaces, lines - 1);   
-        }
+        
+        printDiamond(line);
+        printSpaces(size - line);
+        System.out.println();
+
+        printStyle(line + 1, size)
     }
 
-    void printSpaces(int line, int size)
+    void printDiamond(int count)
     {
         if (count == 0)
             return;
-        else
-        {
-            System.out.print(" ");
-            printSpaces()
-        }
+        System.out.println("*");
+        printDiamond(count - 1);   
+    }
+
+    void printSpaces(int count)
+    {
+        if (count == 0)
+            return;
+        System.out.print(" ");
+        printSpaces(count - 1);
     } 
 }
