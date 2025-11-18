@@ -36,7 +36,7 @@ public class diamond
         printSpaces(size - line);
         System.out.println();
 
-        printStyle(line + 1, size)
+        printStyle(line + 1, size);
     }
 
     void printDiamond(int count)
